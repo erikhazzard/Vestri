@@ -1,0 +1,111 @@
+/*
+* Main.scss
+*
+*  ## NOTES
+*
+* - The main.scss file is only responsible for importing all used scss files. None 
+*   of the other files import anything. 
+*
+* - Keep in mind that the order of the imports matters in some case. E.g. the 'themes/colors'
+*   contains global variables, used in some of the components. So it needs get imported first.
+*
+* - All the CSS is based on border-sizing: border-box!
+*
+* - We are using BEM notation as a convention to name CSS classes for consistency.
+*   (http://csswizardry.com/2013/01/mindbemding-getting-your-head-round-bem-syntax/) 
+*
+* - We use Normalize.css to define all HTML5 defaults for older browsers!
+*
+* - We are using Bourbon to avoid to have to prefix everything with vendor prefixes. Bourbon
+*   also provides some conventient mixins to make some things easier and more consistent
+*   (position, user-select)
+* 
+* - Global variables are UPPERCASE! / Local variables are lowercase!
+*  
+* - Avoid the nesting feature of SCSS, because it's harder to uncludder
+*   CSS classes later on. The reason is that the nesting affects the specificity of those
+*   classes and pulling them out has very often not wanted side effects.
+*
+* - The only time we wanna use nesting for now are modefier classes in the BEM system,
+*   which are indicated by a double hyphen (--). Also in very few cases where we use
+*   tags to semantically structure the markup (e.g <strong>).
+*
+*
+* - Tip: Trying to keep the CSS hierarchy very flat. That allows you later on to create
+*             easy overwrites of the existing rules.
+*
+* - Tip: Naming color variables: http://davidwalsh.name/sass-color-variables-dont-suck 
+*
+* - For Media queries we use a mobile first approach. So by default the page is
+*   designed for a 100% width layout. For bigger screen sizes we set breakpoints 
+*   and make sure it looks good.
+*
+* - For desktop our main column with is 860px
+*
+* - For the main layout containers we use ID's instead of classes!
+*
+* - We animate certain layers with CSS3 transitions! Be careful what properties
+*	to be allowed through transitions. Those have maybe unwanted side effects later
+*	on, which are hard to trace.
+*
+* - Avoid using transition: all its exansive and can have a lot of side effects!
+*
+* - We include mixins always at the top of the class defintion
+*   Example:
+*		.some-component{
+*			@include transition(width 1s);
+*			@include position(absolute, 0 0 0 0);
+*           width: 120px;
+*						
+*		}
+*	https://css-tricks.com/sass-style-guide/
+*/
+
+// ======================================
+//
+// Themes
+//
+// ======================================
+//
+// Imports the based colors used in the app!
+//
+@import "themes/colors";
+
+// ======================================
+//
+// Import 3rd pary files or frameworks/libraries
+//
+// ======================================
+@import "vendors/bourbon/bourbon";
+@import "vendors/normalize";
+@import "vendors/animate.css";
+
+
+// ======================================
+//
+// Base Styles
+//
+// ======================================
+//
+// Makes sure all the CSS divs work with box-sizing "border-box"
+//
+@import "base/base";
+
+//
+// Defines how the list view and conversation are positioned on the site
+//
+@import "base/layout";
+
+//
+// Helpers for css animations/transitions
+//
+@import "utils/helpers";
+
+// ======================================
+//
+// Imports Components used in the chat client
+//
+// ======================================
+
+// IMPORT PAGES HERE
+// @import "components/home";

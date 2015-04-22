@@ -1,0 +1,38 @@
+//==============================================================================
+// Media queries
+//==============================================================================
+
+// specifies width of biggest container that holds the iPhone features
+//$big-container-width: 1360px;
+$mq-break-large: 1350px;
+
+
+$mq-small-smartphone: "only screen and (min-device-width: 0px) and (max-device-width: 320px)";
+$mq-smartphone: "only screen and (min-device-width: 320px) and (max-device-width: 720px)";
+$mq-smartphone-landscape: "only screen and (min-device-width: 320px) and (max-device-width: 720px) and (orientation: landscape)";
+
+$mq-large-smartphone: "only screen and (min-device-width: 590px)";
+$mq-large-smartphone-landscape: "only screen and (min-device-width: 590px) and (orientation: landscape)";
+
+
+$mq-landscape : "only screen and (orientation: landscape)";
+
+$mq-ipad: "only screen and (min-device-width: 768px) and (max-device-width: 1024px)";
+
+$mq-ipad-landscape: "only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: landscape)";
+$mq-ipad-portrait: "only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait)";
+
+
+$mq-iphone4: "only screen and (min-device-width : 320px) and (max-device-width : 480px)";
+$mq-iphone4-landscape: "only screen and (min-device-width : 320px) and (max-device-width : 480px) and (orientation : landscape)";
+$mq-iphone5: "only screen and (device-aspect-ratio: 40/71) and (-webkit-min-device-pixel-ratio: 2) and (max-device-width : 568px)";
+$mq-iphone5-landscape: "only screen and (device-aspect-ratio: 40/71) and (-webkit-min-device-pixel-ratio: 2) and (max-device-width : 568px) and (orientation: landscape)";
+$mq-iphone6: "only screen and (min-device-width : 375px) and (max-device-width : 667px) and (orientation : portrait) and (-webkit-min-device-pixel-ratio : 2)";
+$mq-iphone6-landscape: "only screen and (min-device-width : 375px) and (max-device-width : 667px) and (-webkit-min-device-pixel-ratio : 2) and (orientation: landscape)";
+
+
+$mq-iphone6-plus: "only screen and (min-device-width : 414px) and (max-device-width : 736px) and (orientation : portrait) and (-webkit-min-device-pixel-ratio : 2)";
+$mq-iphone6-plus-landscape: "only screen and (min-device-width : 414px) and (max-device-width : 736px) and (-webkit-min-device-pixel-ratio : 2) and (orientation: landscape)";
+
+// -webkit-min-device-pixel-ratio is for devices like the HTC One M8
+//$mq-smartphone: "only screen and (min-device-width: 320px) and (max-device-width: 720px), only screen and (-webkit-min-device-pixel-ratio: 3), only screen and (-moz-device-pixel-ratio: 3), only screen and (min-resolution: 3dppx)";
