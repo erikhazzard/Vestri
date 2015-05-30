@@ -16,6 +16,7 @@ var sass = require('gulp-sass');
 var gutil = require('gulp-util');
 var minifycss = require('gulp-minify-css');
 var buffer = require('vinyl-buffer');
+var webpack = require('gulp-webpack');
 var exec = require('child_process').exec;
 
 // Path config
@@ -31,35 +32,36 @@ var paths = {
 // --------------------------------------
 gulp.task('scripts', function() {
     // use browserify and optimize scripts
-    browserify('./static/js/main.js')
-        .bundle()
-        .pipe(source('main.js'))
-        // TODO: uglify for non dev
+    gulp.src('./static/js/main.js')
+        .pipe(webpack(require('./webpack.config.js')))
         .pipe(gulp.dest('./static/build/js/'));
 
     // async compress - if we don't, it holds everything else up
-    logger.log('build:js', 'compressing main JS...');
-    var start = Date.now();
-    return setTimeout(function(){
-        exec('gulp compress-js', function(error, stdout, stderr) {
-            if (error !== null) { 
-                logger.log('error:build:js', 'error compressing JS: ' + error);
-            } else {
-                logger.log('build:js:compressed', 'compressed JS in ' + 
-                    ((Date.now() - start) / 1000) + ' seconds');
-            }
-        });
-    }, 100);
+    if(['production', 'prod'].indexOf(process.env.NODE_ENV !== -1)){
+        logger.log('build:js', 'compressing main JS...');
+        var start = Date.now();
+        return setTimeout(function(){
+            exec('gulp compress-js', function(error, stdout, stderr) {
+                if (error !== null) {
+                    logger.log('error:build:js', 'error compressing JS: ' + error);
+                } else {
+                    logger.log('build:js:compressed', 'compressed JS in ' +
+                        ((Date.now() - start) / 1000) + ' seconds');
+                }
+            });
+        }, 3000);
+    }
 });
 
 gulp.task('scripts-tests', function() {
     // Front end script tests
-    return browserify('./static/js/tests/main.js')
-        .bundle()
-        .pipe(source('main-tests.js'))
-        .on('error', gutil.log)
-        .on('error', gutil.beep)
-        // TODO: uglify for non dev
+    return gulp.src('./static/js/tests/main.js')
+        .pipe(webpack({
+            output: {
+                path: __dirname + '/static/build/js/',
+                filename: 'main.test.js'
+            }
+        }))
         .pipe(gulp.dest('./static/build/js/'));
 });
 

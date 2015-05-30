@@ -88,24 +88,23 @@ function logRoute ( req, res, next ){
     req._metaObject = metaObject;
 
     // LOG IT
-    logger.log('server:express-app:request:' + req.method, 
-        logger.util.print(methodSymbol, 'yellow') + ' ' + 
+    logger.log('server:express-app:request:' + req.method,
+        logger.util.print(methodSymbol, 'yellow') + ' ' +
         logger.util.print(req.method, 'blue') + ' : ' + fullUrl +
-        logger.util.print(' | making request...', 'grey'),
+        // print body for NON get requests
+        (req.method === 'GET' ? '' : " | " + logger.util.print(JSON.stringify(req.body), 'grey') + " "),
+        logger.util.print(' | request made from <' + metaObject.remoteAddress + '>', 'grey'),
 
         // send over data object
         metaObject
     );
 
     var userInfo = {
-        username: null,
-        userId: null,
-        isThrowAway: null
+        username: null, userId: null
     };
     if(req.user){
         userInfo.username = req.user.username;
         userInfo.userId = req.user._id;
-        userInfo.isThrowAway = req.user.isThrowAway;
     }
 
     //// Add to analytics for incoming request
@@ -121,7 +120,7 @@ function logRoute ( req, res, next ){
                 "env", "fullUrl", "protocol", 
                 "roomId",
                 "baseUrl", "reqId",
-                "username", "userId", "userIsThrowAway"
+                "username", "userId"
             ],
             points: [[
                 Date.now(), 1, req.url, req.method, HOST_NAME, 
@@ -130,7 +129,7 @@ function logRoute ( req, res, next ){
                 metaObject.roomId,
                 (req.url.match(/[^?]*/) || SINGLE_ITEM_ARRAY)[0],
                 req._reqId,
-                userInfo.username, userInfo.userId, userInfo.isThrowAway
+                userInfo.username, userInfo.userId
             ]]
         });
     }
@@ -217,7 +216,7 @@ function logRoute ( req, res, next ){
                     "env", "fullUrl", "protocol", 
                     "roomId",
                     "baseUrl", "reqId",
-                    "username", "userId", "userIsThrowAway"
+                    "username", "userId"
                 ],
                 points: [[
                     Date.now(), res.responseTime, req.url, req.method, HOST_NAME, 
@@ -226,7 +225,7 @@ function logRoute ( req, res, next ){
                     metaObject.roomId,
                     (req.url.match(/[^?]*/) || SINGLE_ITEM_ARRAY)[0],
                     req._reqId, 
-                    userInfo.username, userInfo.userId, userInfo.isThrowAway
+                    userInfo.username, userInfo.userId
                 ]]
             });
         }

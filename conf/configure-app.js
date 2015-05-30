@@ -117,12 +117,13 @@ module.exports = function configureApp(app, routeFunctions){
         next();
     });
 
-    // session info
-    app.use(sessionHandler);
-
-    // setup passport
-    app.use(passport.initialize());
-    app.use(passport.session());
+    //// SESSIONS
+    //// --------------------------------
+    //// session info
+    //// If you want to enable session storage (and passport, uncomment)
+    //app.use(sessionHandler);
+    //app.use(passport.initialize());
+    //app.use(passport.session());
 
     // -----------------------------------
     //

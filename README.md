@@ -21,6 +21,8 @@ You'll want to change some configuration options for your own app:
 ## Base building blocks - Frontend
 *Gulp* is used to manage building files. To run, run `make gulp`, which runs `gulp watch` but runs it in a loop in case an error occurs which would normally crash gulp (in this case, it just restarts gulp, so you don't have to keep restarting gulp manually everytime a syntax error occurs)
 
+* Webpack is used for building JS
+
 ### CSS
 * SASS
 * Bourbon 
@@ -32,3 +34,5 @@ You'll want to change some configuration options for your own app:
 * EventEmitter
 * Jquery
 * Lodash
+* ReactJS 
+* Fluxxor
